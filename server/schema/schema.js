@@ -15,12 +15,12 @@ const {
 // dummy data
 /*
 var books = [
-  {name: 'Name of the Wind', genre: 'Fantasy', id: '1', authorId: '1'},
-  {name: 'The Final Empire', genre: 'Fantasy', id: '2', authorId: '2'},
-  {name: 'The Long Earth', genre: 'Sci-Fi', id: '3', authorId: '3'},
-  {name: 'The Heroes of Ages', genre: 'Fantasy', id: '4', authorId: '2'},
-  {name: 'The Colour of Magic', genre: 'Fantasy', id: '5', authorId: '3'},
-  {name: 'The Light Fantastic', genre: 'Fantasy', id: '6', authorId: '3'}
+  {name: 'Name of the Wind', genre: 'Fantasy', id: '1', authorId: '5f31438d7be9dbacc5940c8a'},
+  {name: 'The Final Empire', genre: 'Fantasy', id: '2', authorId: '5f3143967be9dbacc5940c8b'},
+  {name: 'The Long Earth', genre: 'Sci-Fi', id: '3', authorId: '5f3143a67be9dbacc5940c8c'},
+  {name: 'The Heroes of Ages', genre: 'Fantasy', id: '4', authorId: '5f3143967be9dbacc5940c8b'},
+  {name: 'The Colour of Magic', genre: 'Fantasy', id: '5', authorId: '5f3143a67be9dbacc5940c8c'},
+  {name: 'The Light Fantastic', genre: 'Fantasy', id: '6', authorId: '5f3143a67be9dbacc5940c8c'}
 ];
 var authors = [
   {name: 'Patrick Rothfuss', age: 44, id: '1'},
@@ -110,6 +110,22 @@ const Mutation = new GraphQLObjectType({
           age: args.age
         });
         return author.save();
+      }
+    },
+    addBook: {
+      type: BookType,
+      args: {
+        name: {type: GraphQLString},
+        genre: {type: GraphQLString},
+        authorId: {type: GraphQLID}
+      },
+      resolve(parent, args){
+        let book = new Book({
+          name: args.name,
+          genre: args.genre,
+          authorId: args.authorId
+        });
+        return book.save();
       }
     }
   }
